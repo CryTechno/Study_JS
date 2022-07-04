@@ -165,7 +165,7 @@ false - выводит в консоль главный объект прогр�
 "Ваш любимый жанр под номером ${номер по порядку}". Каждый ответ записывается в массив данных
 genres
 
-P.S. Функции вызывать не обязательно*/
+P.S. Функции вызывать не обязательно
 
 let numberOfFilms;
 const personalMovieDB = {
@@ -186,7 +186,7 @@ function rememberMyFilms(){
     for(let i = 0; i<2; i++){
         const a = prompt('Один из последних просмотренных фильмов?', ''),
             b = +prompt('На сколько оцените его?', '');
-            if(a==null||a==''||b==null||b==''|| b.length >50 || a.length>50){
+            if(a.trim()==null||a.trim()==''||b.trim()==null||b.trim()==''|| b.length >50 || a.length>50){
                 i--;
             } else{
                 personalMovieDB.movies[a] = b;
@@ -211,14 +211,113 @@ function showMyDB(hidden){
     }
 }
 function writeYourGenres(){
-    for(let i = 0; i < 3; i++){
+    for(let i = 1; i <= 3; i++){
         const quest = prompt(`Ваш любимый жанр под номером ${i}`);
-        personalMovieDB.genres = quest; 
+        personalMovieDB.genres[i-1] = quest; 
     }
-    
 }
-
 start();
 rememberMyFilms();
-
+writeYourGenres();
 showMyDB(personalMovieDB.privat);
+*/
+/*call-back function
+
+function first(){
+    //do something
+    setTimeout(function(){
+        console.log(1);
+    }, 500);
+}
+
+
+function second(){
+    //do something
+    console.log(2);
+}
+
+first();
+second();
+function down(){
+    console.log('Я даун');
+}
+function learnJS(lang, callback){
+    console.log(`Я учу : ${lang}`)
+    callback();
+}
+learnJS('JavaScript', down);
+*/
+
+/*-----------Обьекты и тд
+
+const options = {
+    name: 'test',
+    width: 1024,
+    height: 720,
+    colors: {
+        border: 'black',
+        background: 'red'
+    },
+    makeTest: function(){
+        console.log("Mame q")
+    }
+};
+
+
+for (let key in options){
+    if (typeof(options[key]) === 'object'){
+        for(let i in options[key]){
+            console.log(`Svoistvo ${i} umeet 3na4enie ${options[key][i]}`);
+        }
+    }else{
+    console.log(`Svoistvo ${key} umeet 3na4enie ${options[key]}`);}
+}
+
+console.log(Object.keys(options).length);
+options.makeTest();
+
+const {border, background} = options.colors;
+console.log(border);
+
+
+let num = 3;
+let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let arr_2 = [];
+let j = 0;
+const evenNumber = (array,number) => {
+    
+    for(let i in array){
+        if(array[i]%2==0 && number>0){
+            arr_2[j] = array[i];
+            j++;
+        }
+    }
+    return arr_2.slice(-2);
+}
+
+console.log(evenNumber(arr,num));*/
+/*-----------Massives and pseudo-massives*/
+const arr = [10,1,54,2,65,73,4];
+arr.push(10);
+console.log(arr);
+for(i in arr){
+    console.log(arr[i]);
+}
+for(let value of arr){
+    console.log(arr[value]);
+}
+
+arr.forEach(function(item, i, arr){
+    console.log(`${i}: ${item} внутри ${arr}`)
+
+});
+
+const str = "1, 5, 3, 6";
+const products = str.split(", ");
+products.forEach(function(item, i, products){
+    products[i]= parseInt(products[i]);
+
+});
+console.log(products);
+
+console.log(typeof(products[1]));
