@@ -296,7 +296,7 @@ const evenNumber = (array,number) => {
 }
 
 console.log(evenNumber(arr,num));*/
-/*-----------Massives and pseudo-massives*/
+/*-----------Massives and pseudo-massives
 const arr = [10,1,54,2,65,73,4];
 arr.push(10);
 console.log(arr);
@@ -320,4 +320,439 @@ products.forEach(function(item, i, products){
 });
 console.log(products);
 
-console.log(typeof(products[1]));
+console.log(typeof(products[1]));*/
+/*
+let arr = [1,2,2,2,3];
+let ass = [];
+function arrayDiff(a, b) {
+    let result = []
+    if(b.length!=0){
+        b.forEach(function(it){
+            result = a.filter(function(item){
+                return item != it;
+            });
+            a = result;
+        });
+        return result;
+    }else{return a;}
+}
+console.log(arrayDiff(arr, ass));
+
+let numHigh = 1262347;
+function nextSmaller(n) {
+    function compareNumeric(a, b){
+        return (a - b);
+    }
+    let arrNum;
+    let num;
+    let first_ind;
+    let second_ind;
+    let first_it;
+    let second_it;  
+    let result = [];  
+    num = n.toString();
+    arrNum = Array.from(num).reverse();
+    console.log(arrNum);
+    for(let i = 0; i < arrNum.length; i++){
+        if(arrNum[i] > arrNum[i + 1]){
+            first_ind = i;
+        }
+    }
+    console.log(arrNum[first_ind]);
+    for(let i = first_ind + 1; i < arrNum.length; i++){
+        if(typeof second_it === "undefined" || arrNum[i] > second_it && arrNum[i] < arrNum[first_ind]){
+            second_it = arrNum [i];
+            second_ind = i;
+            break;
+        }
+    }
+    console.log(second_it);
+    first_it = arrNum[first_ind];
+    arrNum[second_ind] = first_it;
+    arrNum[first_ind] = second_it;
+    console.log(arrNum);
+    let res1 = arrNum.slice(0,first_ind+1);
+    let resSort = arrNum.slice(first_ind+1);
+    console.log(res1);
+    resSort.sort(compareNumeric);
+    resSort.reverse();
+    console.log(resSort);
+    console.log(res1.concat(resSort));
+    return res1.concat(resSort);
+  }
+nextSmaller(numHigh);
+*/
+/*--------------Передача по ссылке--------
+
+const obj = {
+    a: 5,
+    b: 1,
+    c: {
+        x:7,
+        y:4
+    }
+
+};
+const copys = obj; // Ссылка на обжект
+
+function copy(mainObj){
+    let objCopy = {};
+    let key;
+    for(key in mainObj){
+        objCopy[key] = mainObj[key];
+    }
+    return objCopy;
+}
+let ObjC = copy(obj);
+ObjC.a = 10;
+ObjC.c.x = 10;
+console.log(ObjC);
+console.log(obj);
+
+const add = {
+    d:17,
+    e:10,
+    c:{
+        history:20,
+        as:30
+    }
+};
+const clone = Object.assign({}, add);
+clone.d = 255;
+console.log(clone);
+console.log(add);
+
+
+const oldArray = ['a', 'b', 'c'];
+const newArray = oldArray.slice();
+newArray[1] = 'asdasdaf'; 
+console.log(newArray);
+console.log(oldArray);
+
+const video = ['Youtube', 'Vimeo', 'rutube'],
+    blogs = ['wordpress', 'livejournal', 'blogspot'],
+    internet = [...video, ...blogs, 'Sucker', 'VK'];
+    console.log(internet);
+
+function log(...c){
+    console.log(c);
+}
+
+const num = [2, 5, 7, 2, 5];
+log(...num);
+
+const array = ["a", "b"];
+
+const newArr = [...array];
+
+*/
+/*--------------OOP---------------------
+
+let str = "some";
+let strObj = new String(str);
+
+console.log(typeof(str));
+console.log(typeof(strObj));
+console.log(str);
+console.log(strObj);
+
+console.dir([1,2,4,5,3]);
+
+const soldier = {
+    health: 400,
+    armor: 100,
+    sayHello: function(){
+        console.log('Hello')
+    }
+};
+
+const John = {
+    health: 100
+};
+
+Object.setPrototypeOf(John,soldier);
+
+console.log(John.armor);
+
+const soldier = {
+    health: 400,
+    armor: 100
+};
+let john = Object.create(soldier);
+  
+console.log(john.health);
+john.sayHello();
+
+
+
+function Ship(draft,crew) {
+    this.draft = draft;
+    this.crew = crew;
+}
+Ship.prototype.isWorthIt = function(){
+   return this.draft-(this.crew*1.5) > 20;
+}
+
+   let titanic = new Ship(0,0);
+   console.log(titanic.isWorthIt());
+*/
+/* Задание на урок:
+
+1) У нас уже есть рабочее приложение, состоящее из отдельных функций. Представьте, что
+перед вами стоит задача переписать его так, чтобы все функции стали методами объекта personalMovieDB
+Такое случается в реальных продуктах при смене технологий или подхода к архитектуре программы
+
+2) Создать метод toggleVisibleMyDB, который при вызове будет проверять свойство privat. Если оно false - он
+переключает его в true, если true - переключает в false. Протестировать вместе с showMyDB.
+
+3) В методе writeYourGenres запретить пользователю нажать кнопку "отмена" или оставлять пустую строку. 
+Если он это сделал - возвращать его к этому же вопросу. После того, как все жанры введены - 
+при помощи метода forEach вывести в консоль сообщения в таком виде:
+"Любимый жанр #(номер по порядку, начиная с 1) - это (название из массива)"
+
+const personalMovieDB = {
+    count: 0,
+    movies: {},
+    actors: {},
+    genres: [],
+    privat: false,
+    start: function(){
+        personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+            while (personalMovieDB.count == '' || personalMovieDB.count == null || isNaN(personalMovieDB.count)){
+                personalMovieDB.count = +prompt('Сколько фильмов вы уже посмотрели?', '');
+            }
+        },
+        rememberMyFilms: () => {
+            for(let i = 0; i<2; i++){
+                const a = prompt('Один из последних просмотренных фильмов?', ''),
+                    b = +prompt('На сколько оцените его?', '');
+                    if(a==null||a==''||b==null||b==''|| b.length >50 || a.length>50){
+                        i--;
+                    } else{
+                        personalMovieDB.movies[a] = b;
+                    }
+            }
+        },
+    detectPersonalLevel: function(){
+            if(personalMovieDB.count < 10 && personalMovieDB.count > 0){
+                console.log('Просмотрено довольно мало фильмов');
+            }else if(personalMovieDB.count >= 10 &&  personalMovieDB.count < 30){
+                console.log('Вы классический зритель');    
+            }else if(personalMovieDB.count >= 30 ){
+                console.log('Вы киноман');    
+            }else{
+                console.log('Произошла ошибка');
+            }
+        },
+    showMyDB: function(hidden){
+            if(!hidden){
+                console.log(personalMovieDB);
+            }
+        },
+
+    toggleVisibleMyDB: () => {
+            if(personalMovieDB.privat){
+                personalMovieDB.privat = false;
+            }else{
+                personalMovieDB.privat = true;
+            }
+        },  
+     writeYourGenres: function(){
+        for(let i = 1; i <= 3; i++){
+            const quest = prompt(`Ваш любимый жанр под номером ${i}`);
+            if(quest==null||quest==''){
+                i--;
+                continue;
+            }
+            personalMovieDB.genres[i-1] = quest; 
+        }
+        personalMovieDB.genres.forEach((element, i) => {
+            console.log(`Любимый жанр #${i+1} - это ${element}`);
+        });
+    }
+};
+personalMovieDB.writeYourGenres();
+
+const s1 = [118,117,120,4,5,6,14,10,11];
+function numObj(s){
+    let Obj = {}
+    let arr = [];
+    for(i in s){
+        let elementStr = String(s[i]);
+        Obj[s[i]] = String.fromCharCode(elementStr);
+        arr.push(Obj);
+        Obj = {};
+    }
+    return arr;
+}
+
+console.log(numObj(s1));
+
+
+function mostMoney(students) {
+    let array = [];
+    if (students.length === 1) {
+       return students[0].name;
+    }
+    students.forEach((value, index) => {
+       let total = ((5 * value.fives) + (10 * value.tens) + (20 * value.twenties));
+       array.push([total, value.name]);
+    });
+    array = array.sort((a, b) => b[0] - a[0]);
+    if (array.every((el, i, array) => el[0] === array[0][0])) {
+      return 'all'; 
+    }
+    else {
+      return array[0][1];
+    }
+  }
+  */
+
+  /*--------------Динамическая Типизация---------------------  
+  console.log(typeof(String(4)));
+  console.log(String(4));
+
+//To String
+console.log(typeof(5 + ""));
+
+const num = 5;
+
+console.log("https://vk.com/catalog" + num);
+
+const fontSize = 26 + 'px';
+
+// To Number
+
+console.log(typeof(Number('4')));
+console.log(typeof((+'4')));
+
+console.log(typeof(parseInt("15px",10)));
+
+let answer = +prompt("mame q?", "");
+
+//To Boolean
+
+//0, '', null, undefined, NaN;
+
+let switcher = 1;
+
+if (switcher){
+    console.log('Working');
+}
+
+
+console.log(typeof(Boolean('4')));
+console.log(Boolean('4'));
+
+console.log(!!"44444");
+*/
+  /*--------------Замыкание и лексичное окружение--------------------- 
+
+let number = 5;
+debugger;
+function logNumb() {
+    let number = 4;debugger;
+    console.log(number);
+};
+
+number = 6;
+logNumb();debugger;
+
+
+function createCounter() {
+    let counter = 0;
+
+    const myFunction = function(){
+        counter = counter + 1;
+        return counter;
+    }
+
+    return myFunction;
+
+}
+
+const increment = createCounter();
+const c1 = increment();
+const c2 = increment();
+const c3 = increment();
+console.log(c1,c2,c3);
+*/
+  /*--------------Задачки---------------------
+  •	Какое будет выведено значение: let x = 5; alert(x++); ? 5
+
+•	Чему равно такое выражение: [ ] + false - null + true ? NaN
+
+•	Что выведет этот код: let y = 1; let x = y = 2; alert(x); ? 2
+
+•	Чему равна сумма [ ] + 1 + 2? 12
+
+•	Что выведет этот код: alert( "1"[0] )?  1
+
+•	Чему равно 2 && 1 && null && 0 && undefined ? null 
+
+•	Есть ли разница между выражениями? !!( a && b ) и (a && b)? da 
+
+•	Что выведет этот код: alert( null || 2 && 3 || 4 ); ? приоритетнее && 
+
+•	a = [1, 2, 3]; b = [1, 2, 3]; Правда ли что a == b ? false
+
+•	Что выведет этот код: alert( +"Infinity" ); ? Infinity
+
+•	Верно ли сравнение: "Ёжик" > "яблоко"? false
+
+•	Чему равно 0 || "" || 2 || undefined || true || falsе ? 2
+
+ */
+  /*--------------РАБОТА СО СТРАНИЧКАМИ---------------------
+
+const box = document.getElementById('box');
+
+console.log(box);
+
+const btns = document.getElementsByTagName('button')[1];
+
+console.log(btns);
+
+const circles = document.getElementsByClassName('circle');
+console.log(circles);
+
+const hearts = document.querySelectorAll('.heart');
+hearts.forEach((item,i)=>{
+    console.log(item);
+})
+console.log(hearts);
+
+const heart = document.querySelector('.heart');
+console.log(heart);
+ */
+
+
+const box = document.getElementById('box'),
+    btns = document.getElementsByTagName('button'),
+    circles = document.getElementsByClassName('circle'),
+    hearts = document.querySelectorAll('.heart'),
+    heart = document.querySelector('.heart'),
+    wrapper = document.querySelector('.wrapper');
+    box.style.backgroundColor = 'blue';
+    box.style.width = '500px';
+
+    box.style.cssText = 'background-color: red; width:400px ';
+
+    btns[1].style.borderRadius = '100%';
+    circles[0].style.backgroundColor =  'red';
+
+    for(let i = 0; i < hearts.length;i++){
+        hearts[i].style.backgroundColor = 'blue';
+    }
+
+    hearts.forEach(item => {
+        item.style.backgroundColor = 'purple';
+    })
+    
+    const div = document.createElement('div');
+    const text = document.createTextNode('Тут был я!');
+
+    div.classList.add('black'); 
+    //wrapper.prepend(div);
+    //hearts[0].after(div);
+    hearts[0].replaceWith(circles[0]);
