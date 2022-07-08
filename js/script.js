@@ -724,7 +724,7 @@ console.log(hearts);
 
 const heart = document.querySelector('.heart');
 console.log(heart);
- */
+
 
 
 const box = document.getElementById('box'),
@@ -754,5 +754,132 @@ const box = document.getElementById('box'),
 
     div.classList.add('black'); 
     //wrapper.prepend(div);
-    //hearts[0].after(div);
+    hearts[0].after(div);
     hearts[0].replaceWith(circles[0]);
+
+    div.innerHTML = "<h1>Hello World</h1>";
+
+    div.insertAdjacentHTML('beforeend', '<h2>Hellow</h2>');
+
+ */
+/*---------------------------------События в ЖС PRAC_3----------------------*/
+
+/*---------------------------------Навигация DOM----------------------*/
+//console.log(document.head);
+
+//console.log(document.documentElement);
+//
+//console.log(document.body.childNodes);
+//console.log(document.body.firstChild);
+//console.log(document.body.lastChild);
+
+//console.log(document.querySelector('#btns').parentNode. parentNode);
+
+//console.log(document.querySelector('[data-btn]').nextElementSibling);
+
+//console.log(document.querySelector('#btns').parentElement);
+//console.log(document.body.firstElementChild);
+
+//for(let node of document.body.childNodes){
+//    if (node.nodeName == "#text"){
+//        continue;
+//    }
+//    console(node);
+//}
+/*---------------------------------Рекурсия----------------------
+
+function pow (x,y) {
+    if(y === 1){
+        return x;
+    }else{
+        return x * pow(x,y-1);
+    }
+}
+
+console.log(pow(2,3));
+
+function getTotalProgressByIteration(data){
+    let totalProgress = 0,
+    students = 0;
+    for(let course of Object.values(data)){
+        if(Array.isArray(course)){
+            students += course.length;
+            for(let i = 0; i< course.length; i++){
+                totalProgress += course[i].progress;
+            }
+        }
+        else{
+            for(let subCourse of Object.values(course)){
+                students += subCourse.length;
+                for(let i = 0; i< subCourse.length; i++){
+                    totalProgress += subCourse[i].progress;
+                }
+
+            }
+
+        }
+    }
+    return totalProgress/students;
+}
+let students = {
+    js: [{
+        name: 'John',
+        progress: 100
+    }, {
+        name: 'Ivan',
+        progress: 60
+    }],
+
+    html: {
+        basic: [{
+            name: 'Peter',
+            progress: 20
+        }, {
+            name: 'Anna',
+            progress: 18
+        }],
+        
+        pro: [{
+            name: 'Sam',
+            progress: 10
+        }],
+
+    }
+};
+
+
+function getTotalProgressByRecursion(data){
+    if(Array.isArray(data)){
+        let totalProgress = 0;  
+        for(let i = 0; i< data.length; i++){
+            totalProgress += data[i].progress;
+        }
+        return [totalProgress, data.length];
+    }else{
+        let totalProgress = [0, 0];
+        for(let subData of Object.values(data)){
+            const subDataArr = getTotalProgressByRecursion(subData); 
+            totalProgress[0] += subDataArr[0];
+            totalProgress[1] += subDataArr[1];
+        }
+        return totalProgress;
+    }
+}
+
+const result = getTotalProgressByRecursion(students);
+
+console.log(result[0]/result[1]);
+
+*/
+
+const p = document.querySelectorAll('.circle');
+console.log(p);
+
+function loadScript(src){
+    const script = document.createElement('script');
+    script.src = src;
+    script.async = false;
+    document.body.append(script);
+}
+loadScript("js/test.js");
+loadScript("js/some.js");
